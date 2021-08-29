@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Alternative Fuel Tracker</title>
+</head>
+<body>
+
+    <main role="main" class="container" style="background-color:rgb(245, 245, 245)">
+      <div class="row">
+        <div class="col-md-8">
+            <p>Alternative Fuel Tracker</p>
+        </div>
+        <div class="col-md-4">
+          <div class="content-section mt-3" style="background-color:#6185fc;">
+            <h3>Station List by Distance (near to far)</h3>
+              <ul class="list-group">
+                {% for location in location_response %}
+                <li>Name: {{ location['station_name'] }}</li>
+                <li>Address: {{ location['street_address'], location['city'], location['zip'] }}</li>
+                <li>Last confirmed: {{ location['date_last_confirmed'] }}</li>
+                <li>From location: {{ location['distance'] }}</li>
+                <br>
+                {% endfor %}
+              </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+</body>
+</html>
