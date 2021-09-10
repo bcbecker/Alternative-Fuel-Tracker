@@ -1,58 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
-      <div class="col-md-4">
-        <div class="content-section mt-3" style="background-color:#6185fc;">
-          <h5>Enter an adresss, city/state or zip, then select mileage range and fuel type</h5>
-          <form method="POST" action="{{ url_for('main.search') }}">
-            {{ form.hidden_tag() }}
-            <fieldset class="form-group">
-              <div class="form-group">
-                {{ form.address_city_state_zip.label(class="form-control-label") }}
-                {% if form.address_city_state_zip.errors %}
-                  {{ form.address_city_state_zip(class="form-control form-control-lg is-invalid") }}
-                  <div class="invalid-feedback">
-                    {% for error in form.address_city_state_zip.errors %}
-                      <span>{{ error }}</span>
-                    {% endfor %}
+    <div class="row">
+      <div class="col-md-12">
+        <div class="content-section mt-3">
+          {% if results_found %}
+          <h3> {{results_found}} stations found (listed near to far)</h3>
+            <ul class="list-group">
+              {% for location in locations %}
+              <article class="media">
+                <div class="media-body">
+                  <h5>
+                    <strong>{{ location["station_name"] }}</strong><small> (Last confirmed: {{ location["date_last_confirmed"] }})</small>
+                  </h5>
+                  <hr>
+                  <p>
+                    {{ location["street_address"] }}, {{ location["city"] }}, {{ location["state"]}} , {{ location["zip"] }}
+                  </p>
+                  <div class="text-right">
+                    <strong>{{ location["distance"] }}</strong> miles
+                    <a href="#">Get directions</a>
                   </div>
-                {% else %}
-                  {{ form.address_city_state_zip(class="form-control form-control-lg") }}
-                {% endif %}
-              </div>
-              <div class="form-group">
-                {{ form.fuel_type.label(class="form-control-label") }}
-                {% if form.fuel_type.errors %}
-                  {{ form.fuel_type(class="form-control form-control-lg is-invalid") }}
-                  <div class="invalid-feedback">
-                    {% for error in form.fuel_type.errors %}
-                      <span>{{ error }}</span>
-                    {% endfor %}
-                  </div>
-                {% else %}
-                  {{ form.fuel_type(class="form-control form-control-lg") }}
-                {% endif %}
-              </div>
-              <div class="form-group">
-                {{ form.distance_radius.label(class="form-control-label") }}
-                {% if form.distance_radius.errors %}
-                  {{ form.distance_radius(class="form-control form-control-lg is-invalid") }}
-                  <div class="invalid-feedback">
-                    {% for error in form.distance_radius.errors %}
-                      <span>{{ error }}</span>
-                    {% endfor %}
-                  </div>
-                {% else %}
-                  {{ form.distance_radius(class="form-control form-control-lg") }}
-                {% endif %}
-              </div>
-            </fieldset>
-            <div class="form-group">
-              {{ form.submit(class="btn btn-secondary") }}
-            </div>
-          </form>
+                </div>
+              </article>
+              {% endfor %}
+            </ul>
+          {% endif %}
         </div>
       </div>
-    </main>
-  </body>
-</html>
+    </div>
 {% endblock %}

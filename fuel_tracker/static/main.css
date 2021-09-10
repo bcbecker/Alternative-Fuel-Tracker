@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Cuprum&display=swap');
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Cuprum', sans-serif;
+}
+
+body {
+    background-image: linear-gradient(to bottom right, rgb(167, 167, 167), rgb(245, 245, 245));
+    height: 100%;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+
+main {
+    background-color:rgb(245, 245, 245);
+    border-radius: 3px;
+  }
+
+
+.content-section {
+    background-color: rgba(81, 182, 173, 0.9);
+    padding: 10px 20px;
+    border: 1px solid rgb(81, 182, 173);
+    border-radius: 3px;
+    margin-bottom: 25px;
+  }
+
+  article {
+    background-color: rgba(207, 207, 207, 0.9);
+    padding: 10px 20px;
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 3px;
+    margin-bottom: 25px;
+  }

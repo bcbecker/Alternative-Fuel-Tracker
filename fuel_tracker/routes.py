@@ -33,7 +33,7 @@ def search():
         response = requests.get(url).json()
         results_found = response['total_results']
         locations = response['fuel_stations']
-        return render_template('search_results.html', locations=locations, results_found=results_found, form=form)
+        return render_template('index.html', locations=locations, results_found=results_found, form=form)
     return redirect(url_for('main.home', form = form))
 
 
