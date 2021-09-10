@@ -1,31 +1,33 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="row">
-      <div class="col-md-12">
-        <div class="content-section mt-3">
-          {% if results_found %}
-          <h3> {{results_found}} stations found (listed near to far)</h3>
-            <ul class="list-group">
-              {% for location in locations %}
-              <article class="media">
-                <div class="media-body">
-                  <h5>
-                    <strong>{{ location["station_name"] }}</strong><small> (Last confirmed: {{ location["date_last_confirmed"] }})</small>
-                  </h5>
-                  <hr>
-                  <p>
-                    {{ location["street_address"] }}, {{ location["city"] }}, {{ location["state"]}} , {{ location["zip"] }}
-                  </p>
-                  <div class="text-right">
-                    <strong>{{ location["distance"] }}</strong> miles
-                    <a href="#">Get directions</a>
-                  </div>
-                </div>
-              </article>
-              {% endfor %}
-            </ul>
-          {% endif %}
-        </div>
-      </div>
-    </div>
+  {% if form.validate_on_submit() %}
+  {% if results_found %}
+  <div class="content-section mt-3">
+    <h3> {{results_found}} stations found near {{ form.address_city_state_zip.data }}</h3>
+      <ul class="list-group">
+        {% for location in locations %}
+        <article class="media">
+          <div class="media-body">
+            <h5>
+              <strong name="placeName">{{ location["station_name"] }}</strong><small> (Last confirmed: {{ location["date_last_confirmed"] }})</small>
+            </h5>
+            <hr>
+            <p name="placeAddress">
+              {{ location["street_address"] }}, {{ location["city"] }}, {{ location["state"]}} , {{ location["zip"] }}
+            </p>
+            <div class="text-right">
+              <strong>{{ location["distance"] }}</strong> miles
+              <a href="{{ url_for('main.directions', origin=form.address_city_state_zip.data, destination=(location['station_name'], location['street_address'], location['city'], location['state'], location['zip'])) }}">Get directions</a>
+            </div>
+          </div>
+        </article>
+        {% endfor %}
+      </ul>
+  </div>
+  {% else %}
+  <div class="content-section mt-3">
+    <h5>No results found</h5>
+  </div>
+  {% endif %}
+  {% endif %}
 {% endblock %}
