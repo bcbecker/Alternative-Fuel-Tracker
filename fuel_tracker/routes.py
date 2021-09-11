@@ -15,11 +15,7 @@ def home():
     """
     form = SearchForm()
     if form.validate_on_submit():
-        url = generate_url(form.address_city_state_zip.data, form.fuel_type.data, form.distance_radius.data)
-        response = requests.get(url).json()
-        results_found = response['total_results']
-        locations = response['fuel_stations']
-        return redirect(url_for('main.search', locations=locations, results_found=results_found , form=form))
+        return redirect(url_for('main.search', form=form))
     return render_template('index.html', form = form)
 
 
@@ -38,7 +34,7 @@ def search():
     return redirect(url_for('main.home', form = form))
 
 
-@main.route("/directions/<string:origin>&<string:destination>")
+@main.route("/directions?origin=<string:origin>&destination<string:destination>")
 def directions(origin, destination):
     """
     Queries Google maps API and opens google maps with route to location
