@@ -1,7 +1,6 @@
 // Initialize and add the map
 function initMap() {
     const chicago = { lat: 41.87388888, lng: -87.75555555 };
-    // The map, centered at chicago
     const map = new google.maps.Map(document.getElementById("map"), {
       zoom: 4,
       center: chicago,

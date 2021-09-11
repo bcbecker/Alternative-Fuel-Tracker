@@ -38,23 +38,22 @@ def search():
     return redirect(url_for('main.home', form = form))
 
 
-@main.route("/directions", methods=['GET', 'POST'])
+@main.route("/directions/<string:origin>&<string:destination>")
 def directions(origin, destination):
     """
     Queries Google maps API and opens google maps with route to location
     """
-    URL_WITH_KEY = "https://www.google.com/maps/dir/?api="+ str(Config.GOOGLE_API_KEY)
-    url = URL_WITH_KEY + "&origin=" + origin + "&destination=" + destination + "travelmode=driving"
-    return requests.get(url)
+    URL_WITH_KEY = "https://www.google.com/maps/dir/?api=1"
+    url = URL_WITH_KEY + "&origin=" + origin + "&destination=" + destination + "&travelmode=driving"
+    return redirect(url)
 
 
 #Utility to create API query url
 def generate_url(location, fuel_type, range_in_miles):
     """
-    Concats the search params to the API url
+    Concats the search params to the API url, limited to 50 maximum
     """
     URL_WITH_KEY = "https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=" + str(Config.NREL_API_KEY)
-    #limit or offset? (see docs)
     search_query = URL_WITH_KEY + "&location=" + location + "&fuel_type=" + fuel_type +\
-            "&radius=" + range_in_miles
+            "&radius=" + range_in_miles + "&limit=50"
     return search_query

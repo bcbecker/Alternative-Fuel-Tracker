@@ -9,7 +9,7 @@
 }
 
 body {
-  background-image: linear-gradient( rgb(167, 167, 167), rgb(225, 225, 225));
+  background-image: linear-gradient( rgb(81, 182, 173), rgb(225, 225, 225));
   }
 
 main {
@@ -46,6 +46,6 @@ article {
 }
 
 #map {
-  height: 600px;
+  height: 100vh;
   width: 100%;
 }
