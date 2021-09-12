@@ -34,7 +34,7 @@ def search():
     return redirect(url_for('main.home', form = form))
 
 
-@main.route("/directions?origin=<string:origin>&destination<string:destination>")
+@main.route("/directions?origin=<string:origin>&destination=<string:destination>")
 def directions(origin, destination):
     """
     Queries Google maps API and opens google maps with route to location

@@ -24,7 +24,8 @@ function codeLocation(geocoder, map) {
             var marker = new google.maps.Marker({
                 map: map,
                 position: results[0].geometry.location,
-                label: targetName[i].innerText
+                label: targetName[i].innerText,
+                animation:google.maps.Animation.DROP
             });
             }
         });

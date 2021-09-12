@@ -19,8 +19,8 @@
             <div class="text-right">
               <strong>{{ location["distance"] }}</strong> miles
               <a href="{{ url_for('main.directions', origin=form.address_city_state_zip.data,
-               destination=location['station_name'] +' '+ location['street_address'] +', '+
-               location['city'] +', '+ location['state'] +', '+ location['zip']) }}" target="_blank">
+                destination=location['street_address'] +' '+ location['city'] +' '+ location['state']
+                +' '+ location['zip']) }}" target="_blank">
                 <button type="button" class="btn btn-sm btn-light">Directions</button>
               </a>
               </div>
