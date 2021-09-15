@@ -17,7 +17,7 @@ def home():
     form = SearchForm()
     if form.validate_on_submit():
         return redirect(url_for('main.search', form=form))
-    return render_template('index.html', form = form)
+    return render_template('index.html', form=form)
 
 
 @main.route("/search", methods=['GET', 'POST'])
@@ -33,7 +33,7 @@ def search():
         results_found = response['total_results']
         locations = response['fuel_stations']
         return render_template('index.html', locations=locations, results_found=results_found, form=form)
-    return redirect(url_for('main.home', form = form))
+    return redirect(url_for('main.home', form=form))
 
 
 @main.route("/directions?origin=<string:origin>&destination=<string:destination>")
