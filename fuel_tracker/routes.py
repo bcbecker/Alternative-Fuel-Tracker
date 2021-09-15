@@ -1,14 +1,15 @@
 from flask import render_template, url_for, redirect, request, Blueprint
 from config import Config
 from fuel_tracker.forms import SearchForm
+from fuel_tracker import limiter
 import requests
-import json
 
 main = Blueprint('main', __name__)
 
 
 @main.route("/", methods=['GET', 'POST'])
 @main.route("/home", methods=['GET', 'POST'])
+@limiter.limit("1/second", override_defaults=False)
 def home():
     """
     Entry point, handles search form input/submission
@@ -20,6 +21,7 @@ def home():
 
 
 @main.route("/search", methods=['GET', 'POST'])
+@limiter.limit("1/second", override_defaults=False)
 def search():
     """
     Fetches search results, handles re-search form input/submission
@@ -35,6 +37,7 @@ def search():
 
 
 @main.route("/directions?origin=<string:origin>&destination=<string:destination>")
+@limiter.limit("2/second", override_defaults=False)
 def directions(origin, destination):
     """
     Queries Google maps API and opens google maps with route to location
@@ -47,9 +50,9 @@ def directions(origin, destination):
 #Utility to create API query url
 def generate_url(location, fuel_type, range_in_miles):
     """
-    Concats the search params to the API url, limited to 50 maximum
+    Concats the search params to the API url, limited to 25 maximum
     """
     URL_WITH_KEY = "https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=" + str(Config.NREL_API_KEY)
     search_query = URL_WITH_KEY + "&location=" + location + "&fuel_type=" + fuel_type +\
-            "&radius=" + range_in_miles + "&limit=50"
+            "&radius=" + range_in_miles + "&limit=25"
     return search_query

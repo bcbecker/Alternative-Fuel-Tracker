@@ -1,13 +1,20 @@
 from flask import Flask
-from config import Config
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+from config import ProductionConfig
 
 
-def create_app(config_class=Config):
-    app = Flask(__name__)
-    app.config.from_object(Config)
+limiter = Limiter(key_func=get_remote_address,
+  default_limits=["50/day"])
+
+
+def create_app(config_class=ProductionConfig):
+    application = Flask(__name__)
+    application.config.from_object(ProductionConfig)
+    limiter.init_app(application)
 
 
     from fuel_tracker.routes import main
-    app.register_blueprint(main)
+    application.register_blueprint(main)
 
-    return app
+    return application
