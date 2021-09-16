@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse" id="navbarToggle">
           <div class="navbar-nav mr-auto">
             <a class="nav-item nav-link" href="{{ url_for('main.home') }}">Search</a>
-            <a class="nav-item nav-link" href="#">About</a>
+            <a class="nav-item nav-link" href="{{ url_for('main.about') }}">About</a>
           </div>
         </div>
       </div>
@@ -27,71 +27,8 @@
   </header>
   <main role="main" class="container">
       <div class="row pl-5">
-          <div class="row">
-              <div class="col-xs-12 pb-2">
-                <div class="content-section mt-3">
-                  <h5>Enter an adresss, city/state, or zip. Then select your desired fuel type and max distance.</h5>
-                  <form class="form-inline" method="POST" action="{{ url_for('main.search') }}">
-                    {{ form.hidden_tag() }}
-                    <fieldset class="form-group">
-                      <div class="form-group">
-                        {{ form.address_city_state_zip.label(class="form-control-label mr-2") }}
-                        {% if form.address_city_state_zip.errors %}
-                          {{ form.address_city_state_zip(class="form-control form-control-md is-invalid") }}
-                          <div class="invalid-feedback">
-                            {% for error in form.address_city_state_zip.errors %}
-                              <span>{{ error }}</span>
-                            {% endfor %}
-                          </div>
-                        {% else %}
-                          {{ form.address_city_state_zip(class="form-control form-control-md mr-3") }}
-                        {% endif %}
-                      </div>
-                      <div class="form-group">
-                        {{ form.fuel_type.label(class="form-control-label mr-2") }}
-                        {% if form.fuel_type.errors %}
-                          {{ form.fuel_type(class="form-control form-control-md is-invalid") }}
-                          <div class="invalid-feedback">
-                            {% for error in form.fuel_type.errors %}
-                              <span>{{ error }}</span>
-                            {% endfor %}
-                          </div>
-                        {% else %}
-                          {{ form.fuel_type(class="form-control form-control-md mr-3") }}
-                        {% endif %}
-                      </div>
-                      <div class="form-group">
-                        {{ form.distance_radius.label(class="form-control-label mr-2") }}
-                        {% if form.distance_radius.errors %}
-                          {{ form.distance_radius(class="form-control form-control-md is-invalid") }}
-                          <div class="invalid-feedback">
-                            {% for error in form.distance_radius.errors %}
-                              <span>{{ error }}</span>
-                            {% endfor %}
-                          </div>
-                        {% else %}
-                          {{ form.distance_radius(class="form-control form-control-md mr-5") }}
-                        {% endif %}
-                      </div>
-                    </fieldset>
-                    <div class="form-group">
-                      {{ form.submit(class="btn btn-secondary") }}
-                    </div>
-                  </form>
-                </div>
-              </div>
-          </div>
-          <div class="col-sm-5">
-            <div class="container scroll">
-                {% block content %}
-                {% endblock %}
-            </div>
-          </div>
-          <div class="col-sm-7">
-              <div class="container">
-                  <div id="map"></div>
-              </div>    
-          </div>
+        {% block content %}
+        {% endblock %}
       </div>
     </main>
     <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>

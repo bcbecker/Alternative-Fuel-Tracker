@@ -1,38 +1,101 @@
 {% extends "base.html" %}
 {% block content %}
-  {% if form.validate_on_submit() %}
-  {% if results_found %}
-  <div class="content-section mt-3">
-    <h3> {{results_found}} stations found near {{ form.address_city_state_zip.data }}</h3>
-      <ul class="list-group">
-        {% for location in locations %}
-        <article class="media">
-          <div class="media-body">
-            <h5>
-              <strong name="placeName">{{ location["station_name"] }}</strong>
-              <small> (Last confirmed: {{ location["date_last_confirmed"] }})</small>
-            </h5>
-            <hr>
-            <p name="placeAddress">
-              {{ location["street_address"] }}, {{ location["city"] }}, {{ location["state"]}} , {{ location["zip"] }}
-            </p>
-            <div class="text-right">
-              <strong>{{ location["distance"] }}</strong> miles
-              <a href="{{ url_for('main.directions', origin=form.address_city_state_zip.data,
-                destination=location['street_address'] +' '+ location['city'] +' '+ location['state']
-                +' '+ location['zip']) }}" target="_blank">
-                <button type="button" class="btn btn-sm btn-light">Directions</button>
-              </a>
-              </div>
+  <div class="row">
+    <div class="col-xs-12 pb-2">
+      <div class="content-section mt-4">
+        <h5>Enter an adresss, city/state, or zip. Then select your desired fuel type and max distance.</h5>
+        <form class="form-inline" method="POST" action="{{ url_for('main.search') }}">
+          {{ form.hidden_tag() }}
+          <fieldset class="form-group">
+            <div class="form-group">
+              {{ form.address_city_state_zip.label(class="form-control-label mr-2") }}
+              {% if form.address_city_state_zip.errors %}
+                {{ form.address_city_state_zip(class="form-control form-control-md is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.address_city_state_zip.errors %}
+                    <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+              {% else %}
+                {{ form.address_city_state_zip(class="form-control form-control-md mr-3") }}
+              {% endif %}
+            </div>
+            <div class="form-group">
+              {{ form.fuel_type.label(class="form-control-label mr-2") }}
+              {% if form.fuel_type.errors %}
+                {{ form.fuel_type(class="form-control form-control-md is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.fuel_type.errors %}
+                    <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+              {% else %}
+                {{ form.fuel_type(class="form-control form-control-md mr-3") }}
+              {% endif %}
+            </div>
+            <div class="form-group">
+              {{ form.distance_radius.label(class="form-control-label mr-2") }}
+              {% if form.distance_radius.errors %}
+                {{ form.distance_radius(class="form-control form-control-md is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.distance_radius.errors %}
+                    <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+              {% else %}
+                {{ form.distance_radius(class="form-control form-control-md mr-5") }}
+              {% endif %}
+            </div>
+          </fieldset>
+          <div class="form-group">
+            {{ form.submit(class="btn btn-secondary") }}
           </div>
-        </article>
-        {% endfor %}
-      </ul>
+        </form>
+      </div>
+    </div>
   </div>
-  {% else %}
-  <div class="content-section mt-3">
-    <h5>No results found</h5>
+  <div class="col-sm-5">
+    <div class="container scroll">
+      {% if form.validate_on_submit() %}
+      {% if results_found %}
+      <div class="content-section mt-3">
+        <h3> {{results_found}} stations found near {{ form.address_city_state_zip.data }}</h3>
+          <ul class="list-group">
+            {% for location in locations %}
+            <article class="media">
+              <div class="media-body">
+                <h5>
+                  <strong name="placeName">{{ location["station_name"] }}</strong>
+                  <small> (Last confirmed: {{ location["date_last_confirmed"] }})</small>
+                </h5>
+                <hr>
+                <p name="placeAddress">
+                  {{ location["street_address"] }}, {{ location["city"] }}, {{ location["state"]}} , {{ location["zip"] }}
+                </p>
+                <div class="text-right">
+                  <strong>{{ location["distance"] }}</strong> miles
+                  <a href="{{ url_for('main.directions', origin=form.address_city_state_zip.data,
+                    destination=location['street_address'] +' '+ location['city'] +' '+ location['state']
+                    +' '+ location['zip']) }}" target="_blank">
+                    <button type="button" class="btn btn-sm btn-light">Directions</button>
+                  </a>
+                  </div>
+              </div>
+            </article>
+            {% endfor %}
+          </ul>
+      </div>
+      {% else %}
+      <div class="content-section mt-3">
+        <h5>No results found</h5>
+      </div>
+      {% endif %}
+      {% endif %}
+    </div>
   </div>
-  {% endif %}
-  {% endif %}
+  <div class="col-sm-7">
+    <div class="container">
+        <div id="map"></div>
+    </div>    
+  </div>
 {% endblock %}

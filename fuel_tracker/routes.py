@@ -17,6 +17,12 @@ def home():
         return redirect(url_for('main.search', form=form))
     return render_template('index.html', form=form)
 
+@main.route("/about")
+def about():
+    """
+    Renders the about page
+    """
+    return render_template('about.html')
 
 @main.route("/search", methods=['GET', 'POST'])
 def search():
