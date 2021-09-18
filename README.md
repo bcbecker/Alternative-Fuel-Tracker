@@ -26,6 +26,7 @@ My favorite thing about this project is that it solves a real-life problem in an
 - Google Maps API
 - Bootstrap CSS
 - JavaScript, jQuery
+- Deployed with AWS Elastic Beanstalk with CodePipeline
 
 
 ## Features
