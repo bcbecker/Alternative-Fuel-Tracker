@@ -74,6 +74,5 @@ Improvements:
 - Make the map more responsive for phones
 
 To Do:
-- About page!
 - Configure https
 - Update AWS CodePipeline to include testing
