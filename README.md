@@ -26,7 +26,7 @@ My favorite thing about this project is that it solves a real-life problem in an
 - Google Maps API
 - Bootstrap CSS
 - JavaScript, jQuery
-- Deployed with AWS Elastic Beanstalk with CodePipeline
+- Deployed with AWS Elastic Beanstalk and CodePipeline
 
 
 ## Features
@@ -74,5 +74,7 @@ Improvements:
 - Make the map more responsive for phones
 
 To Do:
-- Configure https
 - Update AWS CodePipeline to include testing
+
+Recently Done:
+- Added https, custom domain, and redirects
