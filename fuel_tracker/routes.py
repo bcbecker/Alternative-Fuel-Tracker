@@ -56,5 +56,5 @@ def generate_url(location, fuel_type, range_in_miles):
     """
     URL_WITH_KEY = "https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=" + str(Config.NREL_API_KEY)
     search_query = URL_WITH_KEY + "&location=" + location + "&fuel_type=" + fuel_type +\
-            "&radius=" + range_in_miles + "&limit=25"
+            "&radius=" + range_in_miles + "&limit=25" + "&access=public"
     return search_query
