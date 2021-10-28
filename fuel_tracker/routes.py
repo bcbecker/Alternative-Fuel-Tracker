@@ -1,5 +1,5 @@
 from flask import render_template, url_for, redirect, Blueprint
-from config import Config
+from fuel_tracker.config import Config
 from fuel_tracker.forms import SearchForm
 import requests
 

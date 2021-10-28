@@ -1,5 +1,5 @@
 from flask import Flask
-from config import ProductionConfig
+from fuel_tracker.config import ProductionConfig
 
 
 
