@@ -61,7 +61,7 @@
         {% if results_found %}
         <div class="content-section mt-3">
           <h3> {{results_found}} stations found near {{ form.address_city_state_zip.data }}</h3>
-            <ul class="list-group">
+            <ul class="list-group" id="stationsResult">
               {% for location in locations %}
               <article class="media">
                 <div class="media-body">

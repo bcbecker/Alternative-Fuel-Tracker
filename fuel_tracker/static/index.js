@@ -1,13 +1,15 @@
 // Initialize and add the map
 function initMap() {
-    const chicago = { lat: 41.87388888, lng: -87.75555555 };
+    const center = { lat: 39, lng: -98 };
     const map = new google.maps.Map(document.getElementById("map"), {
       zoom: 4,
-      center: chicago,
+      center: center,
     });
     geocoder = new google.maps.Geocoder();
 
-    codeLocation(geocoder, map);
+    if (document.getElementById("stationsResult")) {
+        codeLocation(geocoder, map);
+    }
 }
 
 function codeLocation(geocoder, map) {
@@ -30,5 +32,5 @@ function codeLocation(geocoder, map) {
             }
         });
     }   
-    map.setZoom(11);  
+    map.setZoom(11);
 }
