@@ -10,6 +10,8 @@ class Config:
 class ProductionConfig(Config):
     FLASK_ENV = "production"
     DEBUG = False
+    SESSION_COOKIE_SECURE = True
+    SESSION_COOKIE_HTTPONLY = True
 
 class DevelopmentConfig(Config):
     FLASK_ENV = "development"
