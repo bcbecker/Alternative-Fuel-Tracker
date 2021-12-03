@@ -74,7 +74,7 @@
                     {{ location["street_address"] }}, {{ location["city"] }}, {{ location["state"]}} , {{ location["zip"] }}
                   </p>
                   <div class="text-right">
-                    <strong>{{ location["distance"] }}</strong> miles
+                    <strong>{{ "%.2f"|format(location["distance"]) }}</strong> miles
                     <a href="{{ url_for('main.directions', origin=form.address_city_state_zip.data,
                       destination=location['street_address'] +' '+ location['city'] +' '+ location['state']
                       +' '+ location['zip']) }}" target="_blank">
