@@ -1,7 +1,7 @@
 # Alternative-Fuel-Tracker
 If you embrace alternative and renewable energy, you know it can be challenging to find gas stations sharing that mentality. Alternative Fuel Tracker is here to save the day! Offering flexible search parameters, AFT can find you a station that fits your needs, and then direct you to it.
 
-The live demo is viewable through my portfolio.
+The live demo is viewable at: https://alternativefueltracker.com
 
 
 ## Table of Contents
@@ -53,6 +53,7 @@ pipenv shell
 ### Creating .env file
 For this server to run, you must create a .env file within the package, setting the following parameters:
 ```bash
+FLASK_APP=run.py
 SECRET_KEY=
 NREL_API_KEY=
 GOOGLE_API_KEY=
@@ -62,6 +63,9 @@ Set the secret key to whatever you'd like! You will need to get API keys from bo
 ### Running the Server
 ```bash
 python run.py
+```
+```bash
+flask run
 ```
 
 ### Viewing the website
@@ -77,4 +81,4 @@ To Do:
 - Update AWS CodePipeline to include testing
 
 Recently Done:
-- Added https, custom domain, and redirects
+- Added https, custom domain, and http to https redirects
