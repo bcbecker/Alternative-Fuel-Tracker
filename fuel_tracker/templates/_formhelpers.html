@@ -1,0 +1,11 @@
+<!--Renders form fields and any errors-->
+{% macro render_field(field) %}
+  {{ field|safe }}
+  {% if field.errors %}
+  <div class="invalid-feedback">
+    {% for error in field.errors %}
+      <span>{{ error }}</span>
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endmacro %}

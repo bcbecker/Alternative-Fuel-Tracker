@@ -9,7 +9,7 @@ class SearchForm(FlaskForm):
     """
     fuel_type_choices = [("BD", "Biodiesel"), ("CNG", "Compressed Natural Gas"),
             ("ELEC", "Electric"), ("E85", "Ethanol (E85)"), ("HY", "Hydrogen"),
-                ("LNG", "Liquefied Natural Gas"), ("LPG", "Propane")]
+            ("LNG", "Liquefied Natural Gas"), ("LPG", "Propane")]
 
     distance_radius_choices = ["1", "2", "3", "4", "5", "10", "15", "20", "25", "50", "100"]
 
